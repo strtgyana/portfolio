@@ -20,6 +20,24 @@ window.onscroll = () => {
     })
 }
 
+const toggleThemeBtn = document.getElementById('toggleTheme');
+
+function updateThemeIcon() {
+    if (document.body.classList.contains('light-mode')) {
+        toggleThemeBtn.textContent = '☀️';
+    } else {
+        toggleThemeBtn.textContent = '🌙';
+    }
+}
+
+// atualizar para o tema escuro toda vez que netra na página
+updateThemeIcon();
+
+toggleThemeBtn.onclick = function() {
+    document.body.classList.toggle('light-mode');
+    updateThemeIcon();
+};
+
 menuIcon.onclick = () => {
     menuIcon.classList.toggle('bx-x');
     navbar.classList.toggle('active');
@@ -28,14 +46,37 @@ menuIcon.onclick = () => {
 document.addEventListener("DOMContentLoaded", function () {
     const cookiesMsg = document.getElementById("cookiesMsg");
 
-    // Verifica se o usuário já aceitou os cookies
+    // ve se o usuário já aceitou os cookies
     if (!localStorage.getItem("cookiesAccepted")) {
         cookiesMsg.classList.add("mostrar");
     }
 
-    // Função para aceitar os cookies
+    // funcao que aceita os cookies
     window.aceitarCookies = function () {
         localStorage.setItem("cookiesAccepted", "true");
         cookiesMsg.classList.remove("mostrar");
     };
 });
+
+window.addEventListener('scroll', function() {
+    const skillsSection = document.querySelector('.skills');
+    const skillBars = document.querySelectorAll('.bar .progress-line');
+
+    if (!skillsSection) return;
+
+    const sectionTop = skillsSection.getBoundingClientRect().top;
+    const sectionBottom = skillsSection.getBoundingClientRect().bottom;
+    const windowHeight = window.innerHeight;
+
+    // rola a seção de habilidades para verificar se está na tela visivel
+    if (sectionBottom > 0 && sectionTop < windowHeight) {
+        skillBars.forEach(bar => {
+            bar.classList.add('animate');
+        });
+    } else {
+        skillBars.forEach(bar => {
+            bar.classList.remove('animate');
+        });
+    }
+});
+
