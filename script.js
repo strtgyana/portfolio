@@ -24,9 +24,9 @@ const toggleThemeBtn = document.getElementById('toggleTheme');
 
 function updateThemeIcon() {
     if (document.body.classList.contains('light-mode')) {
-        toggleThemeBtn.textContent = '☀️';
-    } else {
         toggleThemeBtn.textContent = '🌙';
+    } else {
+        toggleThemeBtn.textContent = '☀️';
     }
 }
 
